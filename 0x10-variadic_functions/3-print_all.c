@@ -3,24 +3,50 @@
 #include <string.h>
 #include "variadic_functions.h"
 
+/**
+ *  print_float - prints a float number
+ *
+ * @valist: list of arg types passed to the function
+ */
 void print_float(va_list valist)
 {
 	printf("%f", va_arg(valist, double));
 }
 
+/**
+ *  print_int - prints an integer
+ *
+ * @valist: list of arg types passed to the function
+ */
 void print_int(va_list valist)
 {
 	printf("%d", va_arg(valist, int));
 }
 
+/**
+ *  print_char - prints a char
+ *
+ * @valist: list of arg types passed to the function
+ */
 void print_char(va_list valist)
 {
 	printf("%c", va_arg(valist, int));
 }
 
+/**
+ *  print_str - prints a string
+ *
+ * @valist: list of arg types passed to the function
+ */
+
 void print_str(va_list valist)
 {
-	printf("%s", va_arg(valist, char *));
+	char *s;
+
+	s = va_arg(valist, char*);
+	if (s == NULL)
+		printf("(nill)");
+	printf("%s", s);
 }
 
 /**
@@ -34,7 +60,7 @@ void print_str(va_list valist)
 void print_all(const char * const format, ...)
 {
 	va_list valist;
-	va_start(valist, format);
+	char *separator = "";
 	my_sel ch[] = {
 		{"s", print_str},
 		{"c", print_char},
@@ -43,17 +69,18 @@ void print_all(const char * const format, ...)
 	};
 
 	int i = 0, j = 0;
+	va_start(valist, format);
 
-	while (format[i] != '\0')
+	while (format && format[i])
 	{
 		j = 0;
-		while(j < 4)
+		while (j < 4)
 		{
 			if (format[i] == *ch[j].c)
 			{
+				printf("%s", separator);
 				ch[j].f(valist);
-				if(i < format[(i + 1)])
-				printf(", ");
+				separator = ", ";
 			}
 			j++;
 		}
@@ -61,5 +88,6 @@ void print_all(const char * const format, ...)
 	}
 
 	printf("\n");
+	va_end(valist);
 
 }
