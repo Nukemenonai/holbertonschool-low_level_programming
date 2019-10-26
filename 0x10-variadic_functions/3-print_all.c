@@ -44,7 +44,10 @@ void print_str(va_list valist)
 
 	s = va_arg(valist, char*);
 	if (s == NULL)
-		printf("(nill)");
+	{
+		printf("(nil)");
+		return;
+	}
 	printf("%s", s);
 }
 
