@@ -6,7 +6,7 @@
  * print_strings - prints a variable number of strings
  *
  * @separator: separator character
- * @n: number of strings to be apssed to the function 
+ * @n: number of strings to be apssed to the function
  *
  */
 
@@ -20,7 +20,7 @@ void print_strings(const char *separator, const unsigned int n, ...)
 	{
 		char *value = va_arg(valist, char *);
 
-		if ( value == NULL)
+		if (value == NULL)
 			printf("(nil)");
 
 		if (separator == NULL)
@@ -30,9 +30,11 @@ void print_strings(const char *separator, const unsigned int n, ...)
 			if (i == n - 1)
 				printf("%s", value);
 			else
-				printf("%s%c ", value, *separator);
+				printf("%s%s", value, separator);
 		}
 
 	}
+
 	printf("\n");
+	va_end(valist);
 }
