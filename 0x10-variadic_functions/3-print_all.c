@@ -1,6 +1,5 @@
 #include <stdarg.h>
 #include <stdio.h>
-#include <string.h>
 #include "variadic_functions.h"
 
 /**
@@ -65,16 +64,18 @@ void print_all(const char * const format, ...)
 		{"s", print_str},
 		{"c", print_char},
 		{"f", print_float},
-		{"i", print_int}
+		{"i", print_int},
+		{NULL, NULL}
 	};
 
 	int i = 0, j = 0;
+
 	va_start(valist, format);
 
 	while (format && format[i])
 	{
 		j = 0;
-		while (j < 4)
+		while (ch[j].c)
 		{
 			if (format[i] == *ch[j].c)
 			{
