@@ -1,8 +1,27 @@
-#include "variadic_functions.h"
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
+#include "variadic_functions.h"
 
+void print_float(va_list valist)
+{
+	printf("%f", va_arg(valist, double));
+}
+
+void print_int(va_list valist)
+{
+	printf("%d", va_arg(valist, int));
+}
+
+void print_char(va_list valist)
+{
+	printf("%c", va_arg(valist, int));
+}
+
+void print_str(va_list valist)
+{
+	printf("%s", va_arg(valist, char *));
+}
 
 /**
  *  print_all - prints all
@@ -14,39 +33,33 @@
 
 void print_all(const char * const format, ...)
 {
-	int i;
 	va_list valist;
-
 	va_start(valist, format);
+	my_sel ch[] = {
+		{"s", print_str},
+		{"c", print_char},
+		{"f", print_float},
+		{"i", print_int}
+	};
 
-	i = 0;
-	while (format[i])
+	int i = 0, j = 0;
+
+	while (format[i] != '\0')
 	{
-		switch (format[i])
+		j = 0;
+		while(j < 4)
 		{
-		case 'c':
-			printf("%c", va_arg(valist, int));
-			break;
-		case 'i':
-			printf("%d", va_arg(valist, int));
-			break;
-		case 'f':
-			printf("%f", va_arg(valist, double));
-			break;
-		case 's':
-			printf("%s", va_arg(valist, char *));
-			break;
-		default:
-			i++;
-			continue;
-		}
-		if (i < format[(i + 1)])
-		{
-			printf(",");
+			if (format[i] == *ch[j].c)
+			{
+				ch[j].f(valist);
+				if(i < format[(i + 1)])
+				printf(", ");
+			}
+			j++;
 		}
 		i++;
-
 	}
+
 	printf("\n");
 
 }
