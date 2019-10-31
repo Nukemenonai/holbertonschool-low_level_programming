@@ -11,7 +11,6 @@
 
 list_t *add_node(list_t **head, const char *str)
 {
-	char *s = strdup(str);
 	unsigned int mylen;
 	list_t *new_node = malloc(sizeof(list_t));
 
@@ -21,8 +20,8 @@ list_t *add_node(list_t **head, const char *str)
 
 	if (str == NULL)
 		return (NULL);
-	new_node->str = s;
-	for (mylen = 0; s[mylen] != '\0'; mylen++)
+	new_node->str = strdup(str);
+	for (mylen = 0; str[mylen] != '\0'; mylen++)
 	{}
 
 	/* creating the node using malloc */
