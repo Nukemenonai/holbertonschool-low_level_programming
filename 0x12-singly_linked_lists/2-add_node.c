@@ -18,7 +18,7 @@ list_t *add_node(list_t **head, const char *str)
 	if (str == NULL)
 		return (NULL);
 
-	for (len = 0; s[len] != '\0'; len++)
+	for (mylen = 0; s[mylen] != '\0'; mylen++)
 	{}
 
 	if (new_node == NULL)
@@ -35,6 +35,5 @@ list_t *add_node(list_t **head, const char *str)
 	}
 
 	/* populating the new node  */
-
 	return (new_node);
 }
