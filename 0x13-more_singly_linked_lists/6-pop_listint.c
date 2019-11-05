@@ -1,20 +1,20 @@
 #include "lists.h"
 
 /**
- * pop_listint - 
+ * pop_listint - deletes the first item of a linked list
  *
- * @head:
- *
- *
+ * @head: the pointer to the first element of the list
+ * Return: result
  */
 
 int pop_listint(listint_t **head)
 {
-	int result = -1;
+	int result;
 	listint_t *next_node = NULL;
 
-	if (*head == NULL) {
-		return (-1);
+	if (*head == NULL)
+	{
+		return (0);
 	}
 
 	next_node = (*head)->next;
