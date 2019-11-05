@@ -2,7 +2,6 @@
 
 /**
  * free_listint - frees a linked list of an int
- *
  * @head: the pointer to the first element of the list
  */
 
