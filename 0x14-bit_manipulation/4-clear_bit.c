@@ -8,8 +8,7 @@
  * Return: 1 if successful, -1 otherwise
  */
 
-int clear_bit(unsigned long int *n, unsigned int index);
-
+int clear_bit(unsigned long int *n, unsigned int index)
 {
 	unsigned int i;
 
