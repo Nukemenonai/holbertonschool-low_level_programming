@@ -44,8 +44,11 @@ int main(int ac, char **av)
 			av[1]), exit(98);
 
 	k = close(fd);
+	if (k == -1)
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n",
+			k), exit(100);
 	l = close(fd2);
-	if (k == -1 || l == -1)
+	if (l == -1)
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n",
 			k), exit(100);
 
