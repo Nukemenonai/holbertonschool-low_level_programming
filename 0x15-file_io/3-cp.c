@@ -29,7 +29,7 @@ int main(int ac, char **av)
 	fd2 = open(av[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 	if (fd2 == -1)
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n",
-			av[1]), exit(99);
+			av[2]), exit(99);
 	while ((i = read(fd, buff, 1024)) > 0)
 	{
 		j = write(fd2, buff, i);
@@ -46,11 +46,11 @@ int main(int ac, char **av)
 	k = close(fd);
 	if (k == -1)
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n",
-			k), exit(100);
+			fd), exit(100);
 	l = close(fd2);
 	if (l == -1)
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n",
-			k), exit(100);
+			fd2), exit(100);
 
 	return (0);
 }
