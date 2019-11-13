@@ -33,7 +33,7 @@ int main(int ac, char **av)
 		if (i != j)
 		{
 			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n"
-				, av[1]), exit(99);
+				, av[2]), exit(99);
 		}
 	}
 	if (i == -1)
@@ -44,11 +44,8 @@ int main(int ac, char **av)
 
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n",
 			av[2]), exit(99);
-
-
 	k = close(fd);
 	l = close(fd2);
-
 	if (k == -1 || l == -1)
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n",
 			k), exit(100);
