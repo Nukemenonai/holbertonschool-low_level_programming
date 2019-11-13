@@ -1,4 +1,9 @@
-#include "holberton.h"
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <fcntl.h>
+#include <stdlib.h>
 
 /**
  * _cp - copy the contents of one file to another
@@ -8,7 +13,7 @@
  *
  */
 
-void _cp(char *file_from, char *file_to)
+int _cp(char *file_from, char *file_to)
 {
 	int fd, fd2;
 	int i, j, k, l;
@@ -16,7 +21,7 @@ void _cp(char *file_from, char *file_to)
 
 	fd = open(file_from, O_RDONLY);
 
-	i = read(fd, buff, 1024);
+	i = read(fd, (char *)buff, 1024);
 
 	if (fd == -1 || i == -1)
 	{
@@ -43,6 +48,8 @@ file_from);
 		dprintf(STDERR_FILENO,"Error: Can't close fd %d\n", k);
 		exit(100);
 	}
+	free (buff);
+	return (0);
 }
 
 /**
@@ -59,8 +66,7 @@ int main(int ac, char **av)
 
 	if (ac != 3)
 	{
-		dprintf(STDERR_FILENO, "Usage: cp file_from file_to %s\n",
- av[0]);
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
 
