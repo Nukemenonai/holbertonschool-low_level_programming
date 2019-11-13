@@ -38,6 +38,7 @@ void _cp(char *file_from, char *file_to)
 	if (j == -1)
 	{
 		printf("Error: Can't write to %s\n", file_to);
+		exit(99);
 	}
 
 	k = close(fd);
@@ -61,7 +62,6 @@ void _cp(char *file_from, char *file_to)
 
 int main(int ac, char **av)
 {
-
 
 	if (ac != 3)
 	{
