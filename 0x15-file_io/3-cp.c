@@ -10,6 +10,7 @@
  *
  * @file_from: the file to copy from
  * @file_to: the file to copy to
+ * Return: always 0;
  *
  */
 
@@ -21,18 +22,35 @@ int _cp(char *file_from, char *file_to)
 
 	fd = open(file_from, O_RDONLY);
 
-	i = read(fd, (char *)buff, 1024);
 
-	if (fd == -1 || i == -1)
+
+	if (fd == -1)
 	{
-		dprintf(STDERR_FILENO,"Error: Can't read from file %s\n",
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n",
 file_from);
 		exit(98);
 	}
 
 	fd2 = open(file_to, O_CREAT | O_WRONLY | O_TRUNC, 0664);
 
-	j = write(fd2, buff, i);
+	while ((i = read(fd, (char *)buff, 1024)) > 0)
+	{
+		j = write(fd2, buff, i);
+		if(i != j)
+		{
+			dprintf(STDERR_FILENO,"Error: Can't read from file %s\n"
+				, file_from);
+			exit(98);
+		}
+	}
+
+	if (i == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n",
+file_from);
+		exit(98);
+	}
+
 
 	if (j == -1)
 	{
@@ -45,12 +63,19 @@ file_from);
 
 	if (k == -1 || l == -1)
 	{
-		dprintf(STDERR_FILENO,"Error: Can't close fd %d\n", k);
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", k);
 		exit(100);
 	}
-	free (buff);
+	free(buff);
 	return (0);
 }
+
+/**
+ *while((checker_r = read()) > 0)
+ *      checker write = write()
+         if checker r != checker w
+	  exit 99
+ */
 
 /**
  * main - checks my code :)
