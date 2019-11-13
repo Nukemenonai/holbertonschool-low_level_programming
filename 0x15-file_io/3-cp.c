@@ -14,18 +14,11 @@ void _cp(char *file_from, char *file_to)
 	int i, j, k, l;
 	char *buff = malloc(1024);
 
-	fd = open(file_from, O_RDONLY, 0664);
-
-	if (fd == -1)
-	{
-
-		printf("Error: Can't read from file %s\n", file_from);
-		exit(98);
-	}
+	fd = open(file_from, O_RDONLY);
 
 	i = read(fd, buff, 1024);
 
-	if (i == -1)
+	if (fd == -1 || i == -1)
 	{
 		printf("Error: Can't read from file %s\n", file_from);
 		exit(98);
