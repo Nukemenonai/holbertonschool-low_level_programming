@@ -26,7 +26,7 @@ void _cp(char *file_from, char *file_to)
 
 	fd2 = open(file_to, O_CREAT | O_WRONLY | O_TRUNC, 0664);
 
-	j = write(fd2, buff, 1024);
+	j = write(fd2, buff, i);
 
 	if (j == -1)
 	{
