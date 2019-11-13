@@ -20,7 +20,7 @@ void _cp(char *file_from, char *file_to)
 
 	if (fd == -1 || i == -1)
 	{
-		printf("Error: Can't read from file %s\n", file_from);
+		dprintf(STDERR_FILENO,"Error: Can't read from file %s\n", file_from);
 		exit(98);
 	}
 
@@ -30,7 +30,7 @@ void _cp(char *file_from, char *file_to)
 
 	if (j == -1)
 	{
-		printf("Error: Can't write to %s\n", file_to);
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_to);
 		exit(99);
 	}
 
@@ -39,7 +39,7 @@ void _cp(char *file_from, char *file_to)
 
 	if (k == -1 || l == -1)
 	{
-		printf("Error: Can't close fd %d\n", k);
+		dprintf(STDERR_FILENO,"Error: Can't close fd %d\n", k);
 		exit(100);
 	}
 }
