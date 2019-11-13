@@ -20,7 +20,8 @@ void _cp(char *file_from, char *file_to)
 
 	if (fd == -1 || i == -1)
 	{
-		dprintf(STDERR_FILENO,"Error: Can't read from file %s\n", file_from);
+		dprintf(STDERR_FILENO,"Error: Can't read from file %s\n",
+file_from);
 		exit(98);
 	}
 
@@ -58,7 +59,8 @@ int main(int ac, char **av)
 
 	if (ac != 3)
 	{
-		dprintf(STDERR_FILENO, "Usage: cp file_from file_to %s\n", av[0]);
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to %s\n",
+ av[0]);
 		exit(97);
 	}
 
