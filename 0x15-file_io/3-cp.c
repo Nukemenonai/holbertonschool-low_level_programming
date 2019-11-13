@@ -33,7 +33,7 @@ int main(int ac, char **av)
 	while ((i = read(fd, buff, 1024)) > 0)
 	{
 		j = write(fd2, buff, i);
-		if (i != j)
+		if (j != i)
 		{
 			dprintf(STDERR_FILENO, "Error: Can't write to %s\n"
 				, av[2]), exit(99);
