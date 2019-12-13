@@ -10,7 +10,6 @@
  * @n: the element to insert in the data field
  * Return: the pointer to the new node
  */
-
 dlistint_t *add_dnodeint(dlistint_t **head, const int n)
 {
 	dlistint_t *new;
@@ -18,9 +17,12 @@ dlistint_t *add_dnodeint(dlistint_t **head, const int n)
 	new = malloc(sizeof(dlistint_t));
 	if (new == NULL)
 		return (NULL);
+	if (*head != NULL)
+		(*head)->prev = new;
 	new->n = n;
+	new->prev = NULL;
 	new->next = *head;
 	*head = new;
-	new->prev = NULL;
+
 	return(new);
 }
