@@ -4,14 +4,17 @@
 #include "lists.h"
 
 /**
- * main - check the code for Holberton School students.
+ * get_dnodeint_at_index - gets the info at n node.
  *
+ * @head: the pointer to the first node
+ * @index: the position to get to
  * Return: Always EXIT_SUCCESS.
  */
 
 dlistint_t *get_dnodeint_at_index(dlistint_t *head, unsigned int index)
 {
 	unsigned int pos = 0;
+
 	while (index != pos)
 	{
 		head = head->next;
