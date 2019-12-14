@@ -7,9 +7,9 @@
  * insert_dnodeint_at_index - inserts a node at a given position
  *
  * @h: the pointer to the first node of the list
- * idx: the index to get to
+ * @idx: the index to get to
  * @n: the data to populate data field
- * Return: Always EXIT_SUCCESS.
+ * Return: The address of the newly created node.
  */
 
 
@@ -17,12 +17,12 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 {
 	unsigned int pos = 0;
 	dlistint_t *new;
+	dlistint_t *tmp = *h;
 
 	new = malloc(sizeof(dlistint_t));
 	if (new == NULL)
 		return (NULL);
 	new->n = n;
-
 	if (idx == 0)
 	{
 		new->next = *h;
@@ -33,16 +33,17 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 	{
 		while (pos < (idx - 1))
 		{
-			*h = (*h)->next;
+			tmp = tmp->next;
 			if (*h == NULL)
 			{
+				free(new);
 				return (NULL);
 			}
 			pos++;
 		}
-		new->next = (*h)->next;
-		new->prev = *h;
-		(*h)->next = new;
+		new->next = tmp->next;
+		new->prev = tmp;
+		tmp->next = new;
 		return (new);
 	}
 	return (new);
