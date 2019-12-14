@@ -6,7 +6,8 @@
 /**
  * delete_dnodeint_at_index - delets node at nth pos of a dllist.
  *
- * @head: 
+ * @head: the pointer to the first position
+ * @index: the osition of the list to get to
  * Return: 1 if successful  -1 if error
  */
 
