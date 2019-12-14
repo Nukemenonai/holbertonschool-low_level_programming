@@ -6,6 +6,7 @@
 /**
  * print_dlistint - prints a doubly linked list.
  *
+ * @h: pointer to the header
  * Return: the number of nodes
  */
 
@@ -13,16 +14,13 @@
 size_t print_dlistint(const dlistint_t *h)
 {
 	size_t size = 0;
-	const dlistint_t *mv = h;
 
-	while (mv->next != NULL)
+	while (h != NULL)
 	{
-		printf("%d\n", mv->n);
-		mv = mv->next;
+		printf("%d\n", h->n);
+		h = h->next;
 		size++;
 	}
-	printf("%d\n", mv->n);
-	size++;
 
 	return (size);
 
