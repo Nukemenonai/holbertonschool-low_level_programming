@@ -16,6 +16,9 @@ size_t dlistint_len(const dlistint_t *h)
 	size_t size = 0;
 	const dlistint_t *mv = h;
 
+	if (h == NULL)
+		return (size);
+
 	while (mv->next != NULL)
 	{
 		mv = mv->next;
