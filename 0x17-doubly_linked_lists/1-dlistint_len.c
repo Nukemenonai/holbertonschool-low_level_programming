@@ -4,8 +4,9 @@
 #include "lists.h"
 
 /**
- * print_dlistint - returns the size of a linked list.
+ * dlistint_len - returns the size of a linked list.
  *
+ * @h: the pointer to the first node
  * Return: the number of nodes
  */
 
