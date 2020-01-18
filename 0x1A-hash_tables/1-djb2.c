@@ -1,7 +1,8 @@
 #include "hash_tables.h"
 
 /**
- * hash_djb2 - implementation if the djb2 has function found in cse Yorku
+ * hash_djb2 - implementation if the djb2 hash function
+ * found in http://www.cse.yorku.ca/~oz/hash.html
  *
  * @str: the string to hash
  *
