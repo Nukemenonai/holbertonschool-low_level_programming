@@ -23,6 +23,7 @@ void hash_table_print(const hash_table_t *ht)
 			printf("'%s'", pos->key);
 			printf(":");
 			printf("'%s'", pos->value);
+			printf(", ");
 			pos = pos->next;
 		}
 		idx++;
