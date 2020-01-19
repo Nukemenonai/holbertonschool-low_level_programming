@@ -14,6 +14,7 @@ void hash_table_print(const hash_table_t *ht)
 
 	if (!ht)
 		return;
+
 	printf("{");
 	while (idx < ht->size)
 	{
@@ -22,7 +23,7 @@ void hash_table_print(const hash_table_t *ht)
 		{
 			if (setc)
 				printf(", ");
-			printf("'%s':'%s'", pos->key, pos->value);
+			printf("'%s': '%s'", pos->key, pos->value);
 			setc = 1;
 			if (pos->next != NULL)
 			{
