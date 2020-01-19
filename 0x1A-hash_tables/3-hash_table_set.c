@@ -29,13 +29,22 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		slot->value = strdup(value);
 		return (1);
 	}
+
 	new = malloc(sizeof(new));
 	if (!new)
 		return (0);
-	new->next = slot;
+	new->next = ht->array[idx];
 	ht->array[idx] = new;
 	new->key = strdup(key);
+	if (!new->key)
+	{
+		return(0)
+	}
 	new->value = strdup(value);
+	if (!new->value)
+	{
+		return(0)
+	}
 
 	return (1);
 }
