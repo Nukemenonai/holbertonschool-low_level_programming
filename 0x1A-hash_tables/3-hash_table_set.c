@@ -1,30 +1,5 @@
 #include "hash_tables.h"
 
-/**
- * populate - populates a hash_table node
- *
- * @node: the node to populate
- * @key: the value to fin in key
- * @value: the value to insert in value
- * Return: 1 if successfull 0 if not
- */
-
-int populate(hash_node_t *node, const char *key, const char *value)
-{
-	if (!node)
-		return (0);
-	node->key = malloc(strlen(key) + 1);
-	node->value = malloc(strlen(value) + 1);
-	if (!node->key || !node->value)
-	{
-		free(node);
-		return (0);
-	}
-	strcpy(node->key, key);
-	strcpy(node->value, value);
-	return (1);
-}
-
 
 /**
  * hash_table_set - adds an element to the hash table
@@ -38,28 +13,29 @@ int populate(hash_node_t *node, const char *key, const char *value)
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
 	unsigned long int idx;
-	hash_node_t *entry;
+	hash_node_t *slot, *new;
 
-	if (!key)
+	if (!key || !value || !ht)
 		return (0);
-	idx = key_index((const unsigned char *)key, ht->size);
-	entry = ht->array[idx];
-	if (entry == NULL)
+	idx = key_index((unsigned char *)key, ht->size);
+	slot = ht->array[idx];
+	while (slot && strcmp(slot->key, key) != 0)
 	{
-		entry = malloc(sizeof(entry));
-		populate(entry, key, value);
-		entry->next = NULL;
+		slot = slot->next;
+	}
+
+	if (slot)
+	{
+		slot->value = strdup(value);
 		return (1);
 	}
-	else if (entry != NULL)
-	{
-		hash_node_t *tmp = malloc(sizeof(tmp));
+	new = malloc(sizeof(new));
+	if (!new)
+		return (0);
+	new->next = slot;
+	ht->array[idx] = new;
+	new->key = strdup(key);
+	new->value = strdup(value);
 
-		populate(tmp, key, value);
-		tmp->next = entry;
-		entry = tmp;
-		return (1);
-
-	}
 	return (0);
 }
