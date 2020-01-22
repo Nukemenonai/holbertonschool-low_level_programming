@@ -19,19 +19,16 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		return (0);
 	idx = key_index((unsigned char *)key, ht->size);
 	slot = ht->array[idx];
-	if(slot)
+	if (slot)
 	{
 		for (; slot ; slot = slot->next)
 		{
 			if (!strcmp(slot->key, key))
 			{
-				free(slot->value);
-				slot->value = strdup(value);
+				free(slot->value), slot->value = strdup(value);
 				return (1);
 			}
-
 		}
-
 	}
 	if (slot)
 	{
@@ -40,8 +37,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	}
 	new = malloc(sizeof(new));
 	if (!new)
-        	return (0);
-
+		return (0);
 	new->key = strdup(key);
 	if (!new->key)
 	{
@@ -51,11 +47,9 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	new->value = strdup(value);
 	if (!new->value)
 	{
-		free(new->key);
-		free(new);
+		free(new->key), free(new);
 		return (0);
 	}
-	new->next = ht->array[idx];
-	ht->array[idx] = new;
+	new->next = ht->array[idx], ht->array[idx] = new;
 	return (1);
 }
