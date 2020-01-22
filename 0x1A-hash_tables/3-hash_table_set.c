@@ -19,32 +19,43 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		return (0);
 	idx = key_index((unsigned char *)key, ht->size);
 	slot = ht->array[idx];
-	while (slot && strcmp(slot->key, key) != 0)
+	if(slot)
 	{
-		slot = slot->next;
-	}
+		for (; slot ; slot = slot->next)
+		{
+			if (!strcmp(slot->key, key))
+			{
+				free(slot->value);
+				slot->value = strdup(value);
+				return (1);
+			}
 
+		}
+
+	}
 	if (slot)
 	{
 		slot->value = strdup(value);
 		return (1);
 	}
-
 	new = malloc(sizeof(new));
 	if (!new)
-		return (0);
-	new->next = ht->array[idx];
-	ht->array[idx] = new;
+        	return (0);
+
 	new->key = strdup(key);
 	if (!new->key)
 	{
+		free(new);
 		return (0);
 	}
 	new->value = strdup(value);
 	if (!new->value)
 	{
+		free(new->key);
+		free(new);
 		return (0);
 	}
-
+	new->next = ht->array[idx];
+	ht->array[idx] = new;
 	return (1);
 }
