@@ -3,13 +3,10 @@ SRC = main.c holberton.c
 OBJ = main.o holberton.o
 NAME = holberton
 
-all: comp
+all: recomp
 
-comp: $(OBJ)
-	$(CC) -o $(NAME) $(OBJ)
+recomp: $(OBJ)
+	$(CC) $(OBJ) -o $(NAME)
 
-main.o: main.c m.h
-	gcc -c -o main.o main.c
-
-holberton.o: holberton.c m.h
-	gcc -c -o holberton.o holberton.c
+comp: $(SRC)
+	$(CC) -c $(SRC)
