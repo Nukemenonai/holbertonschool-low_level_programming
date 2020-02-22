@@ -5,9 +5,10 @@
 def island_perimeter(grid):
     """ technical interview preparation """
     perimeter = 0
-    pos = 0
-    for i in range(len(grid)):
-        for j in range(len(grid[i])):
+    m = len(grid)
+    n = len(grid[0])
+    for i in range(m):
+        for j in range(n):
             if grid[i][j]:
                 if not j or not grid[i][j-1]:
                     perimeter += 1
